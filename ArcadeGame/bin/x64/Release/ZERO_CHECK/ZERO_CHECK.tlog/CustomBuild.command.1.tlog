@@ -1,0 +1,10 @@
+^C:\USERS\GOGAT\SOURCE\REPOS\ARCADEGAME\BIN\CMAKEFILES\060B34D495B3EBDEFCA251840178A76F\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/gogat/source/repos/ArcadeGame -BC:/Users/gogat/source/repos/ArcadeGame/bin --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/gogat/source/repos/ArcadeGame/bin/ArcadeGame.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,43 @@
+# CMake build directories
+build/
+CMakeFiles/
+CMakeCache.txt
+CMakeOutput.log
+CMakeError.log
+
+# Makefiles
+Makefile
+makefile
+
+# Ninja build files
+*.ninja
+.ninja_deps
+.ninja_log
+
+# Visual Studio files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.user
+
+# Xcode files
+*.xcodeproj/
+*.xcworkspace/
+
+# Generated files
+*.cmake
+*.pb.h
+*.pb.cc
+
+# Other potential files or directories to ignore
+docs/
+*.log
+*.tmp
+*.o
+*.obj
+*.pdb
+*.idb
+*.userprefs
+
+# Dependency directories
+external/
