@@ -1,40 +1,22 @@
-// AsteroidModel.h
 #pragma once
-#include "Model.h"
-#include <cmath>
-#include <vector>
+#include "HostileEntity.h"
+#include "Vector2D.h"
+#include "Size.c"
 
-#include <cstdlib>
+#include <vector>
 #include <ctime>
 
-class AsteroidModel : public Model {
-public:
-    enum Size { LARGE, MEDIUM, SMALL };
-
+class AsteroidModel : public HostileEntity
+{
 private:
-    float x, y;            // Позиция
-    float velocityX, velocityY; // Скорость
-    float angle;           // Угол движения
-    float rotation;        // Вращение
-    float rotationSpeed;   // Скорость вращения
-    Size size;             // Размер
-    std::vector<std::pair<float, float>> shape; // Форма астероида
+    float rotation;
+    float rotationSpeed;
+    float angle;
+    std::vector<std::pair<float, float>> shape; // возможно, придётся убрать
 
 public:
-    AsteroidModel(float startX, float startY, Size size);
+    AsteroidModel(Vector2D pos, Size size);
+    void Update(float deltaTime, int w, int h) override;
 
-    void Update() override;
-    Size GetSize() const { return size; }
-
-    // Геттеры
-    float GetX() const { return x; }
-    float GetY() const { return y; }
-    float GetAngle() const { return angle; }
-    float GetRotation() const { return rotation; }
-    const std::vector<std::pair<float, float>>& GetShape() const { return shape; }
-
-    void SetVelocity(float v1, float v2);
-
-    bool CheckCollisions(float x, float y, float radius) const override;
-    float GetCollisionRadius() const;
+    float sizeAtFloat();
 };

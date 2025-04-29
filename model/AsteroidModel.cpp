@@ -1,13 +1,13 @@
-// AsteroidModel.cpp
 #include "AsteroidModel.h"
 # define M_PI           3.14159265358979323846
 
-AsteroidModel::AsteroidModel(float startX, float startY, Size size)
-    : x(startX), y(startY), size(size), rotation(0) {
-    // Инициализация случайных значений
-    std::srand(std::time(nullptr));
+AsteroidModel::AsteroidModel(Vector2D pos, Size size)
+{
+	this->position = pos;
+	this->size = size;
 
-    // Установка скорости в зависимости от размера
+	std::srand(std::time(nullptr));
+
     float speed = 0.0f;
     switch (size) {
     case LARGE: speed = 1.0f + (std::rand() % 10) / 10.0f; break;
@@ -18,14 +18,12 @@ AsteroidModel::AsteroidModel(float startX, float startY, Size size)
     angle = std::rand() % 360;
     rotationSpeed = (std::rand() % 10 - 5) / 10.0f;
 
-    // Преобразуем угол в радианы
     float radians = angle * (M_PI / 180.0f);
 
-    // Устанавливаем скорость
-    velocityX = std::sin(radians) * speed;
-    velocityY = -std::cos(radians) * speed;
+    velocity.setX(std::sin(radians) * speed);
+    velocity.setY(-std::cos(radians) * speed);
 
-    // Создаем форму астероида
+    // Заготовка точек для будущей отрисовки
     int points = 8 + std::rand() % 5;
     float radius = 0.0f;
 
@@ -43,29 +41,29 @@ AsteroidModel::AsteroidModel(float startX, float startY, Size size)
     }
 }
 
-void AsteroidModel::Update() {
-    x += velocityX;
-    y += velocityY;
-    rotation += rotationSpeed;
+void AsteroidModel::Update(float deltaTime, int w, int h)
+{
+    position += velocity * deltaTime;
+    rotation += rotationSpeed * deltaTime;
+
+	// В классе GameModel реализуй, что если астероид вышел за границы, то всё нормально
 }
 
-bool AsteroidModel::CheckCollisions(float otherX, float otherY, float otherRadius) const {
-    float dx = x - otherX;
-    float dy = y - otherY;
-    float distance = std::sqrt(dx * dx + dy * dy);
-    return distance < (GetCollisionRadius() + otherRadius);
-}
-
-float AsteroidModel::GetCollisionRadius() const {
-    switch (size) {
-    case LARGE: return 30.0f;
-    case MEDIUM: return 15.0f;
-    case SMALL: return 7.0f;
-    default: return 0.0f;
+float AsteroidModel::sizeAtFloat()
+{
+    float sizeFloat;
+    switch (size)
+    {
+    case SMALL:
+        sizeFloat = 0.25f;
+        break;
+    case MEDIUM:
+        sizeFloat = 0.5f;
+        break;
+    case LARGE:
+        sizeFloat = 1.0f;
+        break;
     }
-}
 
-void AsteroidModel::SetVelocity(float v1, float v2) {
-    this->velocityX = v1;
-    this->velocityY = v2;
+    return sizeFloat;
 }

@@ -2,25 +2,23 @@
 #include "BulletModel.h"
 # define M_PI           3.14159265358979323846
 
-BulletModel::BulletModel(float startX, float startY, float angle)
-    : x(startX), y(startY), angle(angle), speed(10.0f), lifetime(30) {
-    // Преобразуем угол в радианы
-    float radians = angle * (M_PI / 180.0f);
+BulletModel::BulletModel(Vector2D pos, Vector2D vel, float lifetime)
+{
+	this->position = pos;
+	this->velocity = vel;
 
-    // Устанавливаем скорость
-    velocityX = std::sin(radians) * speed;
-    velocityY = -std::cos(radians) * speed;
+	this->lifetime = lifetime;
+}
+	
+bool BulletModel::isAlive() const
+{
+	return lifetime > 0;
 }
 
-void BulletModel::Update() {
-    x += velocityX;
-    y += velocityY;
-    lifetime--;
-}
+void BulletModel::Update(float deltaTime, int w, int h)
+{
+    position += velocity * deltaTime;
+    lifetime -= deltaTime;
 
-bool BulletModel::CheckCollisions(float otherX, float otherY, float otherRadius) const {
-    float dx = x - otherX;
-    float dy = y - otherY;
-    float distance = std::sqrt(dx * dx + dy * dy);
-    return distance < (GetCollisionRadius() + otherRadius);
+    // Потом в GameModel реализуй механизм выхода лазера за пределы окна
 }

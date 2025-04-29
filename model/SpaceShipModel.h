@@ -1,38 +1,24 @@
 #pragma once
 #include "Model.h"
+#include "BulletModel.h"
 #include <cmath>
 
-class SpaceShipModel : public Model {
+class SpaceShipModel : public Model
+{
 private:
-    float x, y;        // Позиция
-    float velocityX, velocityY; // Скорость
-    float angle;        // Угол поворота
-    float acceleration; // Ускорение
-    float maxSpeed;     // Максимальная скорость
-    float rotationSpeed; // Скорость поворота
-
+    float thrustPower; // тяга двигателя
+    bool thrusting; // работает ли двигатель?
+    float invincibilityTime; // время, в которое корабль несокрушим извне
+    float rotation; // Вращение корабля
 public:
-    SpaceShipModel(float startX, float startY);
+    SpaceShipModel(Vector2D pos);
 
-    void Update() override;
+    bool isInvincible() const;
+    BulletModel shoot();
+    void setThrusting(bool isThrusting);
+    void rotate(float angle);
+    void Update(float deltaTime, int w, int h) override;
 
-    // Управление
-    void RotateLeft();
-    void RotateRight();
-    void Accelerate();
-    void Decelerate();
-
-    // Геттеры
-    float GetX() const { return x; }
-    float GetY() const { return y; }
-    float GetAngle() const { return angle; }
-    float GetVelocityX() const { return velocityX; }
-    float GetVelocityY() const { return velocityY; }
-
-    // Сеттеры
-    void SetPosition(float newX, float newY) { x = newX; y = newY; }
-    void SetVelocity(float newVX, float newVY) { velocityX = newVX; velocityY = newVY; }
-
-    bool CheckCollisions(float x, float y, float radius) const override;
-    float GetCollisionRadius() const { return 15.0f; }
+    float getInvincibilityTime() { return invincibilityTime; };
+    void setInvincibilityTime(float it) { this->invincibilityTime = it; };
 };
