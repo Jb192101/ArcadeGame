@@ -1,5 +1,3 @@
-#include "bin/GameController.h"
-
 #include "bin/MenuController.h"
 
 int main() {

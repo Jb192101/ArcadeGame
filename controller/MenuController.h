@@ -6,8 +6,8 @@ class GameController;
 
 class MenuController {
 private:
-    MenuView* menuView;
-    GameController* gameController;
+    MenuView* m_menuView;
+    GameController* m_gameController;
 
     static void onNewGame(Fl_Widget* w, void* data);
     static void onAbout(Fl_Widget* w, void* data);
@@ -18,5 +18,4 @@ public:
     ~MenuController();
 
     void run();
-    void returnToMenu();
 };

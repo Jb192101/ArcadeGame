@@ -1,47 +1,70 @@
 #pragma once
 #include <vector>
+#include <future>
 #include <memory>
 #include <algorithm>
 #include <FL/Fl.H>
 #include "Ship.h"
 #include "Asteroid.h"
 #include "Bullet.h"
+#include "CollisionResult.h"
 
 class GameModel {
 private:
     const int MIN_ASTEROIDS = 5;
+    const int MIN_BULLETS = 5;
+    const int MAX_BULLETS = 4; // Максимальное количество пуль
+    const int COOLDOWN_FRAMES = 10;
 
-    int width;
-    int height;
-    int score;
-    bool gameOver;
+    int m_bulletCooldown = 0;          // Таймер перезарядки/
 
-    std::unique_ptr<Ship> ship;
-    std::vector<std::unique_ptr<Asteroid>> asteroids;
-    std::vector<std::unique_ptr<Bullet>> bullets;
+    int m_width;
+    int m_height;
+    int m_score;
+    bool m_gameOver;
+
+    struct CollisionTaskResult {
+        std::vector<size_t> bulletsToRemove;
+        std::vector<size_t> asteroidsToRemove;
+        std::vector<std::unique_ptr<Asteroid>> newAsteroids;
+        int scoreToAdd = 0;
+        bool shipCollision = false;
+    };
+
+    std::unique_ptr<Ship> m_ship;
+    std::vector<std::unique_ptr<Asteroid>> m_asteroids;
+    std::vector<std::unique_ptr<Bullet>> m_bullets;
 
     void spawnAsteroids(int count);
     void spawnAsteroid();
     void splitAsteroid(Asteroid& parent, std::vector<std::unique_ptr<Asteroid>>& newAsteroids);
+    void splitAsteroid(Asteroid& asteroid);
+
+    std::mutex m_collisionMutex;
+    std::vector<std::future<CollisionTaskResult>> m_collisionFutures;
+
+    void asyncCheckCollisions();
+    void asyncUpdatePositions();
+    void processCollisionResults();
 
 public:
     GameModel(int w, int h);
 
     void update();
-    void handleInput(int key, bool pressed);
     void fireBullet();
     void removeOutOfBoundsObjects();
 
-    int getWidth() const { return width; }
-    int getHeight() const { return height; }
-    int getScore() const { return score; }
-    bool isGameOver() const { return gameOver; }
-    Ship* getShip() const { return ship.get(); }
-    const std::vector<std::unique_ptr<Asteroid>>& getAsteroids() const { return asteroids; }
-    const std::vector<std::unique_ptr<Bullet>>& getBullets() const { return bullets; }
+    int getWidth() const;
+    int getHeight() const;
+    int getScore() const;
+    bool isGameOver() const;
+    Ship* getShip() const;
+    const std::vector<std::unique_ptr<Asteroid>>& getAsteroids() const;
+    const std::vector<std::unique_ptr<Bullet>>& getBullets() const;
 
     void resetGame();
     bool isGameOver();
 
     void handleShipCollision();
+    void cleanUpBullets();
 };

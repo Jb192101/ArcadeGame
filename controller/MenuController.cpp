@@ -3,38 +3,32 @@
 #include <FL/fl_message.H>
 
 MenuController::MenuController() {
-    menuView = new MenuView(400, 300, "Asteroids Menu");
-    menuView->setCallbacks(onNewGame, onAbout, onExit, this);
+    m_menuView = new MenuView(400, 300, "Asteroids Menu");
+    m_menuView->setCallbacks(onNewGame, onAbout, onExit, this);
 }
 
 MenuController::~MenuController() {
-    delete menuView;
-    if (gameController) delete gameController;
+    delete m_menuView;
+    if (m_gameController) delete m_gameController;
 }
 
-void MenuController::run() {
-    menuView->show();
+void MenuController::run() 
+{
+    m_menuView->show();
 }
 
-void MenuController::returnToMenu() {
-    if (gameController) {
-        delete gameController;
-        gameController = nullptr;
-    }
-    menuView->show();
-}
-
-void MenuController::onNewGame(Fl_Widget* w, void* data) {
+void MenuController::onNewGame(Fl_Widget* w, void* data) 
+{
     MenuController* controller = static_cast<MenuController*>(data);
-    controller->menuView->hide();
+    controller->m_menuView->hide();
 
-    controller->gameController = new GameController(800, 600);
-    controller->gameController->setMenuController(controller);
-    controller->gameController->run();
+    controller->m_gameController = new GameController(800, 600);
+    controller->m_gameController->setMenuController(controller);
+    controller->m_gameController->run();
 }
 
 void MenuController::onAbout(Fl_Widget* w, void* data) {
-    fl_message("Asteroids Game\nVersion 1.0\nCreated with FLTK");
+    fl_message("Asteroids Game\nHandle control:\nLeft - rotate ship left\nRigth - rotate ship right\nUp - moving ship forward\nWhitespace - shooting");
 }
 
 void MenuController::onExit(Fl_Widget* w, void* data) {

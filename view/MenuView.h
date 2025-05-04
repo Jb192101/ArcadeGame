@@ -5,9 +5,9 @@
 
 class MenuView : public Fl_Window {
 private:
-    Fl_Button* newGameBtn;
-    Fl_Button* aboutBtn;
-    Fl_Button* exitBtn;
+    Fl_Button* m_newGameBtn;
+    Fl_Button* m_aboutBtn;
+    Fl_Button* m_exitBtn;
 
 public:
     MenuView(int w, int h, const char* title);
