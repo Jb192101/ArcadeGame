@@ -1,2 +1,2 @@
 # ArcadeGame
-Repository for arcade game Asteroids on FLTK
+Репозиторий для аркадной игры "Asteroids", которая написана на C++ с использованием графической библиотеки FLTK
