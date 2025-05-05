@@ -11,7 +11,7 @@ void GameView::draw()
     fl_color(FL_BLACK);
     fl_rectf(0, 0, w(), h());
 
-    if (!m_model->isGameOver()) 
+    if (!m_model->getGameOver()) 
     {
         drawShip();
         drawAsteroids();
@@ -99,7 +99,7 @@ void GameView::drawHUD() const
     snprintf(scoreStr, sizeof(scoreStr), "Score: %d", m_model->getScore());
     fl_draw(scoreStr, 10, 20);
 
-    if (!m_model->isGameOver()) 
+    if (!m_model->getGameOver()) 
     {
         const Ship* ship = m_model->getShip();
         char livesStr[50];

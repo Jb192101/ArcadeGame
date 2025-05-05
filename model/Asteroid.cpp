@@ -29,10 +29,3 @@ int Asteroid::getGeneration() const
 { 
     return m_generation;
 }
-/*
-void Asteroid::wrapAround(int width, int height)
-{
-    if (m_position.getX() < m_size + 20 || m_position.getY() < m_size + 20 || m_position.getX() > width + m_size + 20 || m_position.getY() > height + m_size + 20) 
-        m_active = false;
-}
-*/

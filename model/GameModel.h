@@ -7,7 +7,6 @@
 #include "Ship.h"
 #include "Asteroid.h"
 #include "Bullet.h"
-#include "CollisionResult.h"
 
 class GameModel {
 private:
@@ -57,13 +56,12 @@ public:
     int getWidth() const;
     int getHeight() const;
     int getScore() const;
-    bool isGameOver() const;
+    bool getGameOver() const;
     Ship* getShip() const;
     const std::vector<std::unique_ptr<Asteroid>>& getAsteroids() const;
     const std::vector<std::unique_ptr<Bullet>>& getBullets() const;
 
     void resetGame();
-    bool isGameOver();
 
     void handleShipCollision();
     void cleanUpBullets();

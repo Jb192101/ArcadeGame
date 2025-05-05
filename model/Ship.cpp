@@ -20,7 +20,7 @@ void Ship::update()
     if (m_thrusting) 
     {
         Vector2D thrustVec(cos(m_angle * M_PI / 180.0), sin(m_angle * M_PI / 180.0));
-        m_velocity = m_velocity + thrustVec * m_acceleration * 0.2;
+        m_velocity = m_velocity + thrustVec * m_acceleration * 0.1;
     }
     GameObject::update();
 }

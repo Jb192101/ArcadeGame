@@ -18,6 +18,4 @@ public:
 
     std::vector<Vector2D> getShape() override;
     int getGeneration() const;
-
-    //void wrapAround(int width, int height) override;
 };

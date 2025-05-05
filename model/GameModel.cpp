@@ -114,7 +114,7 @@ void GameModel::spawnAsteroid()
 
     // Иногда создаем более мелкие астероиды
     if (rand() % 4 == 0) 
-    {  // 25% chance
+    { 
         size /= 1.5;
         generation = 2;
     }
@@ -233,22 +233,20 @@ void GameModel::update()
 void GameModel::handleShipCollision() 
 {
     m_ship->loseLife();
-    if (m_ship->getLives() <= 0) {
+    if (m_ship->getLives() <= 0) 
+    {
         m_gameOver = true;
     }
-    else {
+    else 
+    {
         m_ship->reset(Vector2D(m_width / 2, m_height / 2), Vector2D(0, 0));
     }
 }
 
-bool GameModel::isGameOver()
-{
-    return m_gameOver;
-}
-
 void GameModel::fireBullet() 
 {
-    if (m_bulletCooldown > 0 || m_bullets.size() >= MAX_BULLETS) {
+    if (m_bulletCooldown > 0 || m_bullets.size() >= MAX_BULLETS) 
+    {
         return;
     }
 
@@ -285,7 +283,7 @@ int GameModel::getScore() const
     return m_score;
 }
 
-bool GameModel::isGameOver() const 
+bool GameModel::getGameOver() const 
 {
     return m_gameOver;
 }

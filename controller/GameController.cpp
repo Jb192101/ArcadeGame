@@ -35,7 +35,7 @@ void GameController::timerCallback(void* data)
     GameController* controller = static_cast<GameController*>(data);
 
     if (controller->m_isGameActive) {
-        if (controller->m_model.isGameOver()) 
+        if (controller->m_model.getGameOver()) 
         {
             controller->returnToMenu();
         }
