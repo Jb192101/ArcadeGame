@@ -1,16 +1,16 @@
 #include "Vector2D.h"
 
-Vector2D Vector2D::operator+(Vector2D& other) const
+Vector2D Vector2D::operator+(const Vector2D& other) const
 {
     return Vector2D(m_x + other.getX(), m_y + other.getY());
 }
 
-double Vector2D::getX() 
+double Vector2D::getX() const
 { 
     return m_x; 
 
 }
-double Vector2D::getY() 
+double Vector2D::getY() const
 { 
     return m_y; 
 }

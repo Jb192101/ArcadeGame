@@ -2,8 +2,6 @@
 #include "GameObject.h"
 #include "Vector2D.h"
 
-#define M_PI 3.14
-
 class Ship : public GameObject
 {
 private:

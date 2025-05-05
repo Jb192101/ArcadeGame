@@ -10,12 +10,12 @@ private:
 public:
     Vector2D(double x = 0, double y = 0) : m_x(x), m_y(y) {}
 
-    double getX();
-    double getY();
+    double getX() const;
+    double getY() const;
     void setX(double x);
     void setY(double y);
 
-    Vector2D operator+(Vector2D& other) const;
+    Vector2D operator+(const Vector2D& other) const;
     Vector2D operator-(Vector2D& other) const;
     Vector2D operator*(double scalar) const;
 

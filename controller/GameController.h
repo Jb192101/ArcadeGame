@@ -1,8 +1,8 @@
 #pragma once
 #include <FL/Fl.H>
-#include "GameModel.h"
-#include "GameView.h"
-#include "MenuView.h"
+#include "../model/GameModel.h"
+#include "../view/GameView.h"
+#include "../view/MenuView.h"
 
 class MenuController;
 

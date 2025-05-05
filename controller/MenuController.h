@@ -1,6 +1,6 @@
 #pragma once
 #include <FL/Fl.H>
-#include "MenuView.h"
+#include "../view/MenuView.h"
 
 class GameController;
 

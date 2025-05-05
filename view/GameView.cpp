@@ -1,5 +1,5 @@
 #include "GameView.h"
-#include "GameController.h"
+#include "../controller/GameController.h"
 
 GameView::GameView(int w, int h, const char* title, GameModel* model)
     : Fl_Double_Window(w, h, title), m_model(model) {}

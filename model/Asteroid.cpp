@@ -1,7 +1,5 @@
 #include "Asteroid.h"
 
-#define M_PI 3.14
-
 void Asteroid::createRandomShape()
 {
     m_vertices.clear();

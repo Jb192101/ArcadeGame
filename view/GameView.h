@@ -2,9 +2,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>
 #include <FL/fl_draw.H>
-#include "GameModel.h"
-
-#define M_PI 3.14
+#include "../model/GameModel.h"
 
 class GameView : public Fl_Double_Window {
 private:

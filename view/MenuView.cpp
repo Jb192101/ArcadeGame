@@ -1,5 +1,5 @@
 #include "MenuView.h"
-#include "GameController.h"
+#include "../controller/GameController.h"
 #include <FL/fl_message.H>
 
 MenuView::MenuView(int w, int h, const char* title)
