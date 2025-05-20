@@ -2,7 +2,17 @@
 #include "../controller/GameController.h"
 
 GameView::GameView(int w, int h, const char* title, GameModel* model)
-    : Fl_Double_Window(w, h, title), m_model(model) {}
+    : Fl_Double_Window(w, h, title), m_model(std::unique_ptr<GameModel>(model))
+{
+    Fl::add_timeout(1.0 / 120.0, timerCallback, this);
+}
+
+void GameView::timerCallback(void* data)
+{
+    GameView* view = static_cast<GameView*>(data);
+    view->redraw();
+    Fl::repeat_timeout(1.0 / 120.0, timerCallback, data);
+}
 
 void GameView::draw() 
 {
@@ -22,8 +32,6 @@ void GameView::draw()
         fl_color(FL_WHITE);
         fl_font(FL_HELVETICA_BOLD, 36);
         fl_draw("GAME OVER", w() / 2 - 80, h() / 2 - 18);
-        fl_font(FL_HELVETICA, 18);
-        fl_draw("Press 'R' to restart", w() / 2 - 70, h() / 2 + 20);
     }
 
     drawHUD();

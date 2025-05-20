@@ -1,21 +1,21 @@
 #pragma once
-#include <FL/Fl.H>
+#include "GameController.h"
 #include "../view/MenuView.h"
 
 class GameController;
 
-class MenuController {
+class MenuController 
+{
 private:
-    MenuView* m_menuView;
-    GameController* m_gameController;
-
-    static void onNewGame(Fl_Widget* w, void* data);
-    static void onAbout(Fl_Widget* w, void* data);
-    static void onExit(Fl_Widget* w, void* data);
+    std::unique_ptr<MenuView> m_menuView;
+    std::unique_ptr<GameController> m_gameController;
 
 public:
     MenuController();
-    ~MenuController();
+
+    void setupCallBacks();
+
+    void showInstructions();
 
     void run();
 };

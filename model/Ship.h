@@ -23,4 +23,5 @@ public:
     int getLives() const;
     void loseLife();
     void reset(Vector2D pos, Vector2D vel);
+    void fullReset(Vector2D pos);
 };

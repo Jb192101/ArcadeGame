@@ -25,7 +25,7 @@ void Vector2D::setY(double y)
     m_y = y; 
 }
 
-Vector2D Vector2D::operator-(Vector2D& other) const 
+Vector2D Vector2D::operator-(const Vector2D& other) const 
 {
     return Vector2D(m_x - other.getX(), m_y - other.getY());
 }

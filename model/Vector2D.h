@@ -16,7 +16,7 @@ public:
     void setY(double y);
 
     Vector2D operator+(const Vector2D& other) const;
-    Vector2D operator-(Vector2D& other) const;
+    Vector2D operator-(const Vector2D& other) const;
     Vector2D operator*(double scalar) const;
 
     double magnitude() const;

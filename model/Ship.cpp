@@ -28,7 +28,8 @@ void Ship::update()
 std::vector<Vector2D> Ship::getShape()
 {
     double angleRad = m_angle * M_PI / 180.0;
-    std::vector<Vector2D> shape = {
+    std::vector<Vector2D> shape = 
+    {
         Vector2D(m_position.getX() + m_size * cos(angleRad), m_position.getY() + m_size * sin(angleRad)),
         Vector2D(m_position.getX() + m_size / 2 * cos(angleRad + 2.5), m_position.getY() + m_size / 2 * sin(angleRad + 2.5)),
         Vector2D(m_position.getX() + m_size / 3 * cos(angleRad + M_PI), m_position.getY() + m_size / 3 * sin(angleRad + M_PI)),
@@ -53,4 +54,11 @@ void Ship::reset(Vector2D pos, Vector2D vel)
     m_velocity = vel;
     m_angle = 0;
     m_active = true;
+    m_thrusting = false;
+}
+
+void Ship::fullReset(Vector2D pos)
+{
+    reset(pos, Vector2D(0, 0));
+    m_lives = 3;
 }

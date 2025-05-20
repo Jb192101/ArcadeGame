@@ -1,9 +1,5 @@
 #pragma once
 
-/*
-Класс для возможного создания в будущем бонусных объектов
-*/
-
 #include "GameObject.h"
 
 class HostilyEntity : public GameObject

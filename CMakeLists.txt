@@ -14,6 +14,7 @@ model/Asteroid.cpp
 model/Bullet.cpp
 model/GameModel.cpp
 model/GameObject.cpp
+model/HostilyEntity.h
 model/Ship.cpp
 model/Vector2D.cpp
 view/GameView.cpp

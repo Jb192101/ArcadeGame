@@ -12,10 +12,14 @@ void GameObject::update()
 
 void GameObject::wrapAround(int width, int height) 
 {
-    if (m_position.getX() < 0) m_position.setX(width + m_size);
-    if (m_position.getX() > width) m_position.setX(0);
-    if (m_position.getY() < 0) m_position.setY(height + m_size);
-    if (m_position.getY() > height) m_position.setY(0);
+    // if (m_position.getX() < 0) m_position.setX(width + m_size);
+    // if (m_position.getX() > width) m_position.setX(m_size);
+    // if (m_position.getY() < 0) m_position.setY(height + m_size);
+    // if (m_position.getY() > height) m_position.setY(m_size);
+    if (m_position.getX() < -m_size) m_position.setX(width);
+    if (m_position.getX() > width + m_size) m_position.setX(0);
+    if (m_position.getY() < -m_size) m_position.setY(height);
+    if (m_position.getY() > height + m_size) m_position.setY(0);
 }
 
 Vector2D GameObject::getPosition() 
@@ -50,7 +54,7 @@ void GameObject::setActive(bool a)
 
 bool GameObject::checkCollision(GameObject& other) const 
 {
-    if (!m_active || !other.m_active) return false; // Проверка активности
+    if (!m_active || !other.m_active) return false;
     Vector2D diff = m_position - other.m_position;
     double distance = diff.magnitude();
     return distance < (m_size + other.m_size);

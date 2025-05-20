@@ -1,8 +1,9 @@
 #pragma once
-#include <FL/Fl.H>
 #include "../model/GameModel.h"
+#include "MenuController.h"
 #include "../view/GameView.h"
-#include "../view/MenuView.h"
+#include <FL/Fl.H>
+#include <memory>
 
 class MenuController;
 
@@ -10,11 +11,10 @@ class GameController
 {
 private:
     GameModel m_model;
-    GameView* m_view;
-    MenuController* m_menuController;
+    std::unique_ptr<GameView> m_view;
+    std::unique_ptr<MenuController> m_menuController;
     bool m_isGameActive;
 
-    // Флаги состояния клавиш
     bool m_keyLeft = false;
     bool m_keyRight = false;
     bool m_keyUp = false;
@@ -22,15 +22,14 @@ private:
     bool m_keyR = false;
 
     static void timerCallback(void* data);
-    static int handleKey(int event, void* data);
 
     void processInput();
 
 public:
     GameController(int width, int height);
-    ~GameController();
 
     void run();
+
     void setMenuController(MenuController* menu);
     void returnToMenu();
 

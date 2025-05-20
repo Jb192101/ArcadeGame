@@ -15,7 +15,8 @@ void Asteroid::createRandomShape()
 std::vector<Vector2D> Asteroid::getShape()
 {
     std::vector<Vector2D> shape;
-    for (auto& vertex : m_vertices) {
+    for (auto& vertex : m_vertices) 
+    {
         double x = m_position.getX() + vertex.getX() * cos(m_angle * M_PI / 180.0) - vertex.getY() * sin(m_angle * M_PI / 180.0);
         double y = m_position.getY() + vertex.getX() * sin(m_angle * M_PI / 180.0) + vertex.getY() * cos(m_angle * M_PI / 180.0);
         shape.emplace_back(x, y);
